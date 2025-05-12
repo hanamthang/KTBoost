@@ -1646,16 +1646,16 @@ class BaseBoosting(six.with_metaclass(ABCMeta, BaseEnsemble)):
             self.init_ = self.init
 
         self.estimators_ = np.empty((self.n_estimators, self.loss_.K),
-                                    dtype=np.object)
+                                    dtype=object)
         self.estimators_kernel_ = np.empty((self.n_estimators, self.loss_.K),
-                                    dtype=np.object)##Dimension 0: models, 1: reponse variable
+                                    dtype=object)##Dimension 0: models, 1: reponse variable
         self.kernel_mat = None##Kernel matrix saved in order to construct only once
         self.pred_kernel_mat = None##Same for prediction in staged predictions
         self.component_indices = None##Indices of the data points used for Nystroem sampling
         self.kernel_mat_nystroem_full = None##Kernel matrix needed to make predictions at all training locations when Nystroem sampling is used
         self.scaler=None##Function that scale features
         self.neigh_ind=None##Indices of nearest neighbors for kNN
-        self.number_estimators = np.empty((self.n_estimators,2),dtype=np.object)##Number of estimators [0]: trees, [1]: other base learners
+        self.number_estimators = np.empty((self.n_estimators,2),dtype=object)##Number of estimators [0]: trees, [1]: other base learners
         self.train_score_ = np.zeros((self.n_estimators,), dtype=np.float64)
         
         # do oob?
@@ -1669,7 +1669,7 @@ class BaseBoosting(six.with_metaclass(ABCMeta, BaseEnsemble)):
     def _clear_state(self):
         """Clear the state of the boosting model. """
         if hasattr(self, 'estimators_'):
-            self.estimators_ = np.empty((0, 0), dtype=np.object)
+            self.estimators_ = np.empty((0, 0), dtype=object)
         if hasattr(self, 'train_score_'):
             del self.train_score_
         if hasattr(self, 'val_score_'):
